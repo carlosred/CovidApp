@@ -29,4 +29,54 @@ class CovidHttpClient {
     }
     return result;
   }
+
+  Future<List<Map<String, dynamic>>?> getStatesCodes() async {
+    List<Map<String, dynamic>>? result = [];
+    try {
+      var url = Uri.https(
+        Contants.baseApiUrl,
+        Contants.getStatesCodes,
+      );
+
+      var response = await http.get(
+        url,
+      );
+
+      if (response.statusCode == 200) {
+        var responseList = jsonDecode(response.body) as List<dynamic>;
+
+        result = responseList.map((e) => e as Map<String, dynamic>).toList();
+      } else {
+        log('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Request failed with status: ${e.toString()}');
+    }
+    return result;
+  }
+
+  Future<List<Map<String, dynamic>>?> getStatesInfo() async {
+    List<Map<String, dynamic>>? result = [];
+    try {
+      var url = Uri.https(
+        Contants.baseApiUrl,
+        Contants.getStatesInfo,
+      );
+
+      var response = await http.get(
+        url,
+      );
+
+      if (response.statusCode == 200) {
+        var responseList = jsonDecode(response.body) as List<dynamic>;
+
+        result = responseList.map((e) => e as Map<String, dynamic>).toList();
+      } else {
+        log('Request failed with status: ${response.statusCode}');
+      }
+    } catch (e) {
+      log('Request failed with status: ${e.toString()}');
+    }
+    return result;
+  }
 }

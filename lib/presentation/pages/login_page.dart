@@ -201,9 +201,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
 
                                 var result = await ref
                                     .read(covidRepositoryProvider)
-                                    .getCovidTotalData();
+                                    .getCovidStatesInfo();
 
-                                log(result!.toJson().toString());
+                                log('covidStates length:${result!.length}');
                               },
                               status: LoginStatus.login,
                             ),
