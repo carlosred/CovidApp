@@ -1,4 +1,5 @@
 import 'package:covid_app/data/datasources/covid_http_client.dart';
+import 'package:covid_app/domain/models/covid_state_detail.dart';
 import 'package:covid_app/domain/models/covid_state_info.dart';
 import 'package:covid_app/domain/models/covid_total_data.dart';
 import 'package:covid_app/domain/models/covid_state.dart';
@@ -47,5 +48,23 @@ class CovidRepository {
       covidStatesInfo = null;
     }
     return covidStatesInfo;
+  }
+
+  Future<CovidStateDetail?> getCovidStateDetail({
+    required String state,
+  }) async {
+    CovidStateDetail? covidStateDetail;
+
+    try {
+      var result = await covidHttpClient.getCovidStateDetail(
+        state: state,
+      );
+      if (result != null) {
+        covidStateDetail = CovidStateDetail.fromJson(result);
+      }
+    } catch (e) {
+      covidStateDetail = null;
+    }
+    return covidStateDetail;
   }
 }
