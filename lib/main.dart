@@ -1,6 +1,6 @@
+import 'package:covid_app/presentation/pages/home_page.dart';
 import 'package:flutter/material.dart';
 
-import 'presentation/pages/login_page.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const HomePage(),
     );
   }
 }
