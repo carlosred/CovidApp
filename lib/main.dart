@@ -1,3 +1,4 @@
+import 'package:covid_app/presentation/pages/states_page.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/pages/login_page.dart';
@@ -19,10 +20,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Covid App',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      home: const LoginPage(),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
+          useMaterial3: true,
+          appBarTheme: const AppBarTheme(
+            color: Colors.white,
+            surfaceTintColor: Colors.white,
+            shadowColor: Colors.grey,
+          )),
+      home: const StatesPage(),
     );
   }
 }
