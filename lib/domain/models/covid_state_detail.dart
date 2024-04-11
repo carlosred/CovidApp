@@ -56,25 +56,25 @@ class CovidStateDetail {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['state'] = state;
-    _data['notes'] = notes;
-    _data['covid19Site'] = covid19Site;
-    _data['covid19SiteSecondary'] = covid19SiteSecondary;
-    _data['covid19SiteTertiary'] = covid19SiteTertiary;
-    _data['covid19SiteQuaternary'] = covid19SiteQuaternary;
-    _data['covid19SiteQuinary'] = covid19SiteQuinary;
-    _data['twitter'] = twitter;
-    _data['covid19SiteOld'] = covid19SiteOld;
-    _data['covidTrackingProjectPreferredTotalTestUnits'] =
+    final data = <String, dynamic>{};
+    data['state'] = state;
+    data['notes'] = notes;
+    data['covid19Site'] = covid19Site;
+    data['covid19SiteSecondary'] = covid19SiteSecondary;
+    data['covid19SiteTertiary'] = covid19SiteTertiary;
+    data['covid19SiteQuaternary'] = covid19SiteQuaternary;
+    data['covid19SiteQuinary'] = covid19SiteQuinary;
+    data['twitter'] = twitter;
+    data['covid19SiteOld'] = covid19SiteOld;
+    data['covidTrackingProjectPreferredTotalTestUnits'] =
         covidTrackingProjectPreferredTotalTestUnits;
-    _data['covidTrackingProjectPreferredTotalTestField'] =
+    data['covidTrackingProjectPreferredTotalTestField'] =
         covidTrackingProjectPreferredTotalTestField;
-    _data['totalTestResultsField'] = totalTestResultsField;
-    _data['pui'] = pui;
-    _data['pum'] = pum;
-    _data['name'] = name;
-    _data['fips'] = fips;
-    return _data;
+    data['totalTestResultsField'] = totalTestResultsField;
+    data['pui'] = pui;
+    data['pum'] = pum;
+    data['name'] = name;
+    data['fips'] = fips;
+    return data;
   }
 }

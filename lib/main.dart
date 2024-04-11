@@ -1,3 +1,4 @@
+import 'package:covid_app/presentation/pages/state_detail_page.dart';
 import 'package:flutter/material.dart';
 
 import 'presentation/pages/login_page.dart';
@@ -22,7 +23,9 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginPage(),
+      home: const StateDetailPage(
+        state: 'ak',
+      ),
     );
   }
 }
