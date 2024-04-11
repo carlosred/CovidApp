@@ -1,17 +1,30 @@
+import 'package:covid_app/presentation/providers/presentation_providers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
-class DeviceInfoWidget extends StatelessWidget {
+class DeviceInfoWidget extends ConsumerWidget {
   const DeviceInfoWidget({
     super.key,
     required this.width,
     required this.height,
+    required this.deviceInfo,
   });
 
   final double width;
   final double height;
-
+  final Map<String, dynamic>? deviceInfo;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    var dateTimeNow = ref.watch(dateTimeProvider);
+    var nowString = DateFormat('HH:mm:ss').format(
+      dateTimeNow,
+    );
+    var amPmString = DateFormat('a').format(
+      dateTimeNow,
+    );
+    var platformString =
+        (Theme.of(context).platform == TargetPlatform.iOS) ? 'IOS' : 'ANDROID';
     return Positioned(
       right: width * 0.04,
       top: -(height * 0.12),
@@ -35,13 +48,13 @@ class DeviceInfoWidget extends StatelessWidget {
             )
           ],
         ),
-        child: const Column(
+        child: Column(
           children: [
             Row(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 10.0,
                       top: 10.0,
                     ),
@@ -50,25 +63,28 @@ class DeviceInfoWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          '02:35:00',
-                          style: TextStyle(
+                          nowString,
+                          style: const TextStyle(
                             fontSize: 25.0,
                           ),
                         ),
-                        Text('pm'),
+                        Text(amPmString),
                       ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 10.0,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text('Nombre del dispositivo'), Text('XXXX')],
+                      children: [
+                        const Text('Nombre del dispositivo'),
+                        Text(deviceInfo?['device'] ?? '')
+                      ],
                     ),
                   ),
                 )
@@ -78,7 +94,7 @@ class DeviceInfoWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 10.0,
                       top: 10.0,
                     ),
@@ -86,9 +102,9 @@ class DeviceInfoWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Marca del dispositivo'),
+                        const Text('Marca del dispositivo'),
                         Text(
-                          'XXXX',
+                          deviceInfo?['brand'] ?? '',
                           textAlign: TextAlign.start,
                         )
                       ],
@@ -97,13 +113,18 @@ class DeviceInfoWidget extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 10.0,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text('Tipo del dispositivo'), Text('XXXX')],
+                      children: [
+                        const Text('Tipo del dispositivo'),
+                        Text(
+                          deviceInfo?['product'] ?? '',
+                        )
+                      ],
                     ),
                   ),
                 )
@@ -113,28 +134,32 @@ class DeviceInfoWidget extends StatelessWidget {
               children: [
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 10.0,
                       top: 10.0,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [Text('Modelo del dispositivo'), Text('XXXX')],
+                      children: [
+                        const Text('Modelo del dispositivo'),
+                        Text(deviceInfo?['model'] ?? '')
+                      ],
                     ),
                   ),
                 ),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       top: 10.0,
                     ),
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Sistema operativo y su versión'),
-                        Text('XXXX')
+                        const Text('Sistema operativo y su versión'),
+                        Text(
+                            '$platformString - ${deviceInfo?['version']['release']}')
                       ],
                     ),
                   ),

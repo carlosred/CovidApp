@@ -1,13 +1,13 @@
-import 'dart:developer';
-
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:covid_app/presentation/controllers/login_controller.dart';
 import 'package:covid_app/presentation/pages/home_page.dart';
 import 'package:covid_app/presentation/widgets/login_button.dart';
 import 'package:covid_app/utils/enum.dart';
+import 'package:covid_app/utils/toast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -38,11 +38,16 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
     ref.listenManual(loginControllerProvider, (previous, next) {
       if (next.hasValue && next.value != null) {
-        ref.read(authProvider.notifier).state = true;
+        if (next.value == true) {
+          ref.read(authProvider.notifier).state = true;
 
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const HomePage(),
-        ));
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const HomePage(),
+          ));
+        } else {
+          Toast.showToast(
+              context: context, message: 'Documento o Contraseña Incorrectos');
+        }
       }
     });
     super.initState();
@@ -178,7 +183,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     loginController.when(
                       data: (data) {
-                        if (data != null) {
+                        if (data != null && data == true) {
                           return Padding(
                             padding: const EdgeInsets.symmetric(
                               vertical: 10.0,
@@ -227,36 +232,36 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                       ),
                     ),
-                    const Padding(
-                      padding: EdgeInsets.symmetric(
+                    Padding(
+                      padding: const EdgeInsets.symmetric(
                         vertical: 10.0,
                       ),
                       child: Center(
-                        child: Text('Registrar usuario'),
-                      ),
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 100,
-                          height: 100,
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.2),
-                            shape: BoxShape.circle,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.5),
-                                  blurRadius: 5,
-                                  spreadRadius: 5,
-                                  offset: const Offset(-10, -10)),
-                            ],
-                            border: Border.all(
-                              color: Colors.grey.withOpacity(0.5),
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: const Text(
+                            'Registrar usuario',
+                            style: TextStyle(
+                              decoration: TextDecoration.underline,
                             ),
                           ),
-                          child: const Center(
-                            child: Text('Facebook'),
-                          ),
+                        ),
+                      ),
+                    ),
+                    const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        const SocialMediaWidget(
+                          image: 'assets/images/facebook.png',
+                          message: 'Facebook',
+                        ),
+                        const SocialMediaWidget(
+                          image: 'assets/images/google.png',
+                          message: 'Google',
+                        ),
+                        const SocialMediaWidget(
+                          image: 'assets/images/instagram.png',
+                          message: 'Google',
                         ),
                       ],
                     ),
@@ -269,6 +274,65 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
           ),
         ]),
+      ),
+    );
+  }
+}
+
+class SocialMediaWidget extends StatelessWidget {
+  const SocialMediaWidget({
+    super.key,
+    required this.image,
+    required this.message,
+  });
+
+  final String image;
+  final String message;
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              blurRadius: 2,
+              spreadRadius: 2,
+              offset: const Offset(0, 0),
+            ),
+          ],
+          border: Border.all(
+            color: Colors.grey.withOpacity(0.5),
+          ),
+        ),
+        child: Center(
+          child: Container(
+            width: 50,
+            height: 50,
+            decoration: const BoxDecoration(
+              shape: BoxShape.circle,
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey,
+                  offset: Offset(0, 3),
+                  blurRadius: 5,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
+            child: ClipOval(
+              child: Image.asset(
+                image,
+                fit: BoxFit.cover,
+              ),
+            ),
+          ),
+        ),
       ),
     );
   }

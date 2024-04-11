@@ -31,4 +31,8 @@ class LoginController extends _$LoginController {
       state = AsyncError(error, stack);
     }
   }
+
+  void logout() {
+    state = const AsyncData(false);
+  }
 }

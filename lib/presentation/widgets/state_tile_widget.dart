@@ -66,7 +66,7 @@ class StateTileWidget extends StatelessWidget {
                     ),
                     child: ClipOval(
                       child: Image.asset(
-                        'assets/images/login.webp',
+                        'assets/images/states.jpeg',
                         fit: BoxFit.cover,
                       ),
                     ),

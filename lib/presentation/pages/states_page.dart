@@ -31,9 +31,14 @@ class _StatesPageState extends ConsumerState<StatesPage> {
         elevation: 3,
         backgroundColor: Colors.white,
         surfaceTintColor: Colors.white,
-        leading: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          ),
         ),
         title: const Text(
           'Detalles por region',

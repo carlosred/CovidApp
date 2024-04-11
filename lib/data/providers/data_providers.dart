@@ -18,5 +18,3 @@ var covidRepositoryProvider = Provider<CovidRepository>(
 );
 
 var authProvider = StateProvider<bool>((ref) => false);
-
-var deviceInfoProvider = StateProvider<Map<String, dynamic>?>((ref) => null);
