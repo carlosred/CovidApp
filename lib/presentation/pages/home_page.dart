@@ -10,6 +10,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/routes/routes.dart';
 import '../widgets/device_info_widget.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -49,8 +50,9 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return PopScope(
       onPopInvoked: (value) {
-        Navigator.of(context).pop();
         ref.read(loginControllerProvider.notifier).logout();
+        Navigator.of(context)
+            .popUntil((route) => route.settings.name == Routes.loginRoute);
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,

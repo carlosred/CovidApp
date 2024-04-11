@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
-import 'package:covid_app/presentation/pages/login_page.dart';
+import 'package:covid_app/core/routes/routes.dart';
+
 import 'package:covid_app/services/device_info_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,9 +23,9 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
       if (deviceInfo != null) {
         ref.read(deviceInfoProvider.notifier).state = deviceInfo;
-        Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => const LoginPage(),
-        ));
+        Navigator.of(context).pushNamed(
+          Routes.loginRoute,
+        );
       }
     });
     super.initState();

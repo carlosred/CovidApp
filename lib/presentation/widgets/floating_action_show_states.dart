@@ -1,6 +1,7 @@
-import 'package:covid_app/presentation/pages/states_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../core/routes/routes.dart';
 
 class FloatingShowStatesButton extends ConsumerStatefulWidget {
   const FloatingShowStatesButton({super.key});
@@ -26,10 +27,8 @@ class _FloatingShowStatesButtonState
         ),
       ),
       onPressed: () async {
-        Navigator.of(context).push(
-          MaterialPageRoute(
-            builder: (context) => const StatesPage(),
-          ),
+        Navigator.of(context).pushNamed(
+          Routes.statesRoute,
         );
       },
       tooltip: 'Ver Mas detalles',

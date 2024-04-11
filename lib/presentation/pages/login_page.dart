@@ -1,13 +1,14 @@
+import 'package:covid_app/core/routes/routes.dart';
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:covid_app/presentation/controllers/login_controller.dart';
-import 'package:covid_app/presentation/pages/home_page.dart';
+
 import 'package:covid_app/presentation/widgets/login_button.dart';
 import 'package:covid_app/utils/enum.dart';
 import 'package:covid_app/utils/toast.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class LoginPage extends ConsumerStatefulWidget {
@@ -19,8 +20,8 @@ class LoginPage extends ConsumerStatefulWidget {
 
 class _LoginPageState extends ConsumerState<LoginPage> {
   String _selectedOption = 'CC';
-  var _usermameController = TextEditingController();
-  var _passwordController = TextEditingController();
+  final _usermameController = TextEditingController();
+  final _passwordController = TextEditingController();
 
   final ButtonStyle raisedButtonStyle = ElevatedButton.styleFrom(
     backgroundColor: Colors.orange,
@@ -41,9 +42,9 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         if (next.value == true) {
           ref.read(authProvider.notifier).state = true;
 
-          Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => const HomePage(),
-          ));
+          Navigator.of(context).pushNamed(
+            Routes.homeRoute,
+          );
         } else {
           Toast.showToast(
               context: context, message: 'Documento o Contraseña Incorrectos');

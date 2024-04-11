@@ -1,4 +1,4 @@
-import 'package:covid_app/presentation/pages/state_detail_page.dart';
+import 'package:covid_app/core/routes/routes.dart';
 import 'package:flutter/material.dart';
 
 class StateTileWidget extends StatelessWidget {
@@ -22,10 +22,9 @@ class StateTileWidget extends StatelessWidget {
       ),
       child: GestureDetector(
         onTap: () {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (context) => StateDetailPage(state: state['code']),
-            ),
+          Navigator.of(context).pushNamed(
+            Routes.statesDetailRoute,
+            arguments: state['code'],
           );
         },
         child: Container(
