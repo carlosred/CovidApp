@@ -30,6 +30,7 @@ class _StatesPageState extends ConsumerState<StatesPage> {
       appBar: AppBar(
         elevation: 3,
         backgroundColor: Colors.white,
+        surfaceTintColor: Colors.white,
         leading: const Icon(
           Icons.arrow_back,
           color: Colors.black,
@@ -40,6 +41,7 @@ class _StatesPageState extends ConsumerState<StatesPage> {
             color: Colors.black,
           ),
         ),
+        shadowColor: Colors.grey,
       ),
       backgroundColor: Colors.white,
       body: SizedBox(

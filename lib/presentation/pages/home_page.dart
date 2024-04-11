@@ -1,8 +1,10 @@
 import 'package:covid_app/presentation/controllers/home_page_controller.dart';
 import 'package:covid_app/presentation/widgets/covid_total_row_widget.dart';
+import 'package:covid_app/presentation/widgets/floating_action_show_states.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart';
 
 import '../widgets/device_info_widget.dart';
 
@@ -28,6 +30,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     var height = MediaQuery.sizeOf(context).height;
 
     var homePageController = ref.watch(homePageControllerProvider);
+
     return Scaffold(
       extendBodyBehindAppBar: true,
       backgroundColor: Colors.white,
@@ -95,14 +98,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                                 ),
                                 SizedBox(
                                   width: width,
-                                  child: const Padding(
-                                    padding: EdgeInsets.only(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
                                       top: 20.0,
                                       left: 25.0,
                                       bottom: 20.0,
                                     ),
                                     child: Text(
-                                      'Fecha Recolección Datos: dd.mm.yyyy',
+                                      'Fecha Recolección Datos: ${DateFormat('dd.MM.yyyy').format(
+                                        DateTime.parse(data.dateChecked),
+                                      )}',
                                       textAlign: TextAlign.left,
                                     ),
                                   ),
@@ -131,6 +136,16 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   primarySubtitle: 'Fallecidos',
                                   secondaryTitle: data.pending.toString(),
                                   secondarySubtitle: 'Pendientes',
+                                ),
+                                const SizedBox(
+                                  height: 10.0,
+                                ),
+                                CovidTotalRowWidget(
+                                  primaryTitle: data.inIcuCurrently.toString(),
+                                  primarySubtitle: 'En UCI',
+                                  secondaryTitle:
+                                      data.onVentilatorCurrently.toString(),
+                                  secondarySubtitle: 'Con ventiladores',
                                 ),
                                 const SizedBox(
                                   height: 20.0,
@@ -180,6 +195,7 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
         ),
       ),
+      floatingActionButton: const FloatingShowStatesButton(),
     );
   }
 }

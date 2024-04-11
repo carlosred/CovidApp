@@ -23,7 +23,7 @@ class StatesPageController extends _$StatesPageController {
           for (var covidState in covidStates) {
             if (covidStateInfo.state == covidState.code) {
               result.add({
-                'state': covidState.code,
+                'code': covidState.code,
                 'name': covidState.name,
                 'positive': covidStateInfo.positive,
                 'lastUpdated': covidStateInfo.lastUpdateEt,

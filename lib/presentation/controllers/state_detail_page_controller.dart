@@ -17,11 +17,6 @@ class StateDetailPageController extends _$StateDetailPageController {
   }) async {
     state = const AsyncLoading();
     try {
-      await Future.delayed(
-        const Duration(
-          seconds: 3,
-        ),
-      );
       var stateDetail =
           await ref.read(covidRepositoryProvider).getCovidStateDetail(
                 state: covidState,

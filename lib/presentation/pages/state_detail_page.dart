@@ -14,9 +14,9 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      ref
-          .read(stateDetailPageControllerProvider.notifier)
-          .getCovidStateDetail(covidState: widget.state);
+      ref.read(stateDetailPageControllerProvider.notifier).getCovidStateDetail(
+            covidState: widget.state.toLowerCase(),
+          );
     });
     super.initState();
   }

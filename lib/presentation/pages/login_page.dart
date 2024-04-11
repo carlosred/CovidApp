@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:covid_app/presentation/controllers/login_controller.dart';
+import 'package:covid_app/presentation/pages/home_page.dart';
 import 'package:covid_app/presentation/widgets/login_button.dart';
 import 'package:covid_app/utils/enum.dart';
 import 'package:flutter/material.dart';
@@ -31,9 +32,19 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       ),
     ),
   );
+
   @override
   void initState() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.leanBack);
+    ref.listenManual(loginControllerProvider, (previous, next) {
+      if (next.hasValue && next.value != null) {
+        ref.read(authProvider.notifier).state = true;
+
+        Navigator.of(context).push(MaterialPageRoute(
+          builder: (context) => const HomePage(),
+        ));
+      }
+    });
     super.initState();
   }
 
@@ -186,7 +197,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             child: LoginButton(
                               ref: ref,
                               onPressed: () async {
-                                /*
                                 if (_selectedOption == 'CC') {
                                   await ref
                                       .read(loginControllerProvider.notifier)
@@ -197,13 +207,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                             _passwordController.text.trim(),
                                       );
                                 }
-                                */
-
-                                var result = await ref
-                                    .read(covidRepositoryProvider)
-                                    .getCovidStateDetail(state: 'ca');
-
-                                log('covidStates length:${result?.toJson().toString()}');
                               },
                               status: LoginStatus.login,
                             ),
