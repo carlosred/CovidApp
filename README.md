@@ -1,16 +1,35 @@
-# covid_app
+# CovidApp
 
-A new Flutter project.
+### Description
 
-## Getting Started
+A Flutter mobile app that mimics the covid app tracker. 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Setup
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+1. **Clone the Repository:**
+
+    ```bash
+    git clone https://github.com/carlosred/CovidApp.git
+    cd CovidApp
+    ```
+
+2. **Install Dependencies:**
+
+    ```bash
+    flutter pub get
+    ```
+
+### Running the App
+
+#### Android
+
+```bash
+flutter run -d android
+```
+
+
+### Usage
+
+Log in the app with the username: 1234567890 and the password: dummy123
