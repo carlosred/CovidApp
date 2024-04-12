@@ -141,7 +141,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         bottom: 20.0,
                                       ),
                                       child: Text(
-                                        '${Constants.homeImage} ${DateFormat('dd.MM.yyyy').format(
+                                        '${Constants.dateChecked} ${DateFormat('dd.MM.yyyy').format(
                                           DateTime.parse(data.dateChecked),
                                         )}',
                                         textAlign: TextAlign.left,

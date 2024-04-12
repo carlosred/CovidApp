@@ -1,3 +1,4 @@
+import 'package:covid_app/core/routes/routes.dart';
 import 'package:covid_app/presentation/pages/home_page.dart';
 import 'package:covid_app/presentation/pages/splash_page.dart';
 import 'package:covid_app/presentation/pages/state_detail_page.dart';
@@ -11,25 +12,25 @@ class RouteGenerator {
     final args = settings.arguments;
 
     switch (settings.name) {
-      case '/':
+      case Routes.splashRoute:
         return MaterialPageRoute(
           builder: (context) => const SplashPage(),
         );
 
-      case '/login':
+      case Routes.loginRoute:
         return MaterialPageRoute(
           builder: (context) => const LoginPage(),
         );
 
-      case '/home':
+      case Routes.homeRoute:
         return MaterialPageRoute(
           builder: (context) => const HomePage(),
         );
-      case '/states':
+      case Routes.statesRoute:
         return MaterialPageRoute(
           builder: (context) => const StatesPage(),
         );
-      case '/states/detail':
+      case Routes.statesDetailRoute:
         var value = args as String;
         return MaterialPageRoute(
           builder: (context) => StateDetailPage(

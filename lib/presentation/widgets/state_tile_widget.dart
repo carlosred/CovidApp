@@ -85,7 +85,7 @@ class StateTileWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        '${Constants.totalCases}  ${state['positive']}',
+                        '${Constants.totalCases}:  ${state['positive']}',
                         style: const TextStyle(
                           fontSize: 11.0,
                           fontWeight: FontWeight.bold,

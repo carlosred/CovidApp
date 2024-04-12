@@ -130,7 +130,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text(Constants.passport),
+                      child: Text(Constants.documentNumber),
                     ),
                     TextFormField(
                       controller: _usermameController,
