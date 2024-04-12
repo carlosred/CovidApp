@@ -81,32 +81,32 @@ class CovidTotalData {
   }
 
   Map<String, dynamic> toJson() {
-    final _data = <String, dynamic>{};
-    _data['date'] = date;
-    _data['states'] = states;
-    _data['positive'] = positive;
-    _data['negative'] = negative;
-    _data['pending'] = pending;
-    _data['hospitalizedCurrently'] = hospitalizedCurrently;
-    _data['hospitalizedCumulative'] = hospitalizedCumulative;
-    _data['inIcuCurrently'] = inIcuCurrently;
-    _data['inIcuCumulative'] = inIcuCumulative;
-    _data['onVentilatorCurrently'] = onVentilatorCurrently;
-    _data['onVentilatorCumulative'] = onVentilatorCumulative;
-    _data['dateChecked'] = dateChecked;
-    _data['death'] = death;
-    _data['hospitalized'] = hospitalized;
-    _data['totalTestResults'] = totalTestResults;
-    _data['lastModified'] = lastModified;
-    _data['recovered'] = recovered;
-    _data['total'] = total;
-    _data['posNeg'] = posNeg;
-    _data['deathIncrease'] = deathIncrease;
-    _data['hospitalizedIncrease'] = hospitalizedIncrease;
-    _data['negativeIncrease'] = negativeIncrease;
-    _data['positiveIncrease'] = positiveIncrease;
-    _data['totalTestResultsIncrease'] = totalTestResultsIncrease;
-    _data['hash'] = hash;
-    return _data;
+    final data = <String, dynamic>{};
+    data['date'] = date;
+    data['states'] = states;
+    data['positive'] = positive;
+    data['negative'] = negative;
+    data['pending'] = pending;
+    data['hospitalizedCurrently'] = hospitalizedCurrently;
+    data['hospitalizedCumulative'] = hospitalizedCumulative;
+    data['inIcuCurrently'] = inIcuCurrently;
+    data['inIcuCumulative'] = inIcuCumulative;
+    data['onVentilatorCurrently'] = onVentilatorCurrently;
+    data['onVentilatorCumulative'] = onVentilatorCumulative;
+    data['dateChecked'] = dateChecked;
+    data['death'] = death;
+    data['hospitalized'] = hospitalized;
+    data['totalTestResults'] = totalTestResults;
+    data['lastModified'] = lastModified;
+    data['recovered'] = recovered;
+    data['total'] = total;
+    data['posNeg'] = posNeg;
+    data['deathIncrease'] = deathIncrease;
+    data['hospitalizedIncrease'] = hospitalizedIncrease;
+    data['negativeIncrease'] = negativeIncrease;
+    data['positiveIncrease'] = positiveIncrease;
+    data['totalTestResultsIncrease'] = totalTestResultsIncrease;
+    data['hash'] = hash;
+    return data;
   }
 }

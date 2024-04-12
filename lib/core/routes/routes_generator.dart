@@ -1,4 +1,5 @@
 import 'package:covid_app/presentation/pages/home_page.dart';
+import 'package:covid_app/presentation/pages/splash_page.dart';
 import 'package:covid_app/presentation/pages/state_detail_page.dart';
 import 'package:covid_app/presentation/pages/states_page.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,7 @@ class RouteGenerator {
     switch (settings.name) {
       case '/':
         return MaterialPageRoute(
-          builder: (context) => const LoginPage(),
+          builder: (context) => const SplashPage(),
         );
 
       case '/login':

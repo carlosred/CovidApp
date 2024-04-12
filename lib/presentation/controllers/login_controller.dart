@@ -10,10 +10,11 @@ class LoginController extends _$LoginController {
     return null;
   }
 
-  Future<void> login({
+  Future<bool?> login({
     required String username,
     required String password,
   }) async {
+    bool? result;
     state = const AsyncLoading();
     try {
       await Future.delayed(
@@ -27,9 +28,12 @@ class LoginController extends _$LoginController {
           );
 
       state = AsyncData(auth);
+      result = auth;
     } catch (error, stack) {
       state = AsyncError(error, stack);
+      result = null;
     }
+    return result;
   }
 
   void logout() {

@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/routes/routes_generator.dart';
 
+import 'utils/contants.dart';
+
 void main() {
   runApp(
     const ProviderScope(
@@ -18,10 +20,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Covid App',
+      title: Constants.title,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
+        dialogTheme: const DialogTheme(surfaceTintColor: Colors.white),
       ),
       initialRoute: '/',
       onGenerateRoute: RouteGenerator.generateRoute,

@@ -1,4 +1,5 @@
 import 'package:covid_app/core/routes/routes.dart';
+import 'package:covid_app/utils/contants.dart';
 import 'package:flutter/material.dart';
 
 class StateTileWidget extends StatelessWidget {
@@ -84,7 +85,7 @@ class StateTileWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Casos totales:  ${state['positive']}',
+                        '${Constants.totalCases}  ${state['positive']}',
                         style: const TextStyle(
                           fontSize: 11.0,
                           fontWeight: FontWeight.bold,
@@ -92,7 +93,7 @@ class StateTileWidget extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        'Ultima modificacion: ${state['lastUpdated']}',
+                        '${Constants.lastUpdated} ${state['lastUpdated']}',
                         style: const TextStyle(
                           fontSize: 11.0,
                           fontWeight: FontWeight.normal,

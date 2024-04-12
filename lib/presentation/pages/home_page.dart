@@ -11,6 +11,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/routes/routes.dart';
+
+import '../../utils/contants.dart';
 import '../widgets/device_info_widget.dart';
 
 class HomePage extends ConsumerStatefulWidget {
@@ -35,6 +37,12 @@ class _HomePageState extends ConsumerState<HomePage> {
     super.initState();
   }
 
+  void _logout() {
+    ref.read(loginControllerProvider.notifier).logout();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+        Routes.loginRoute, (route) => route.settings.name == Routes.homeRoute);
+  }
+
   @override
   void dispose() {
     super.dispose();
@@ -50,9 +58,7 @@ class _HomePageState extends ConsumerState<HomePage> {
 
     return PopScope(
       onPopInvoked: (value) {
-        ref.read(loginControllerProvider.notifier).logout();
-        Navigator.of(context)
-            .popUntil((route) => route.settings.name == Routes.loginRoute);
+        _logout();
       },
       child: Scaffold(
         extendBodyBehindAppBar: true,
@@ -72,7 +78,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           Center(
                             child: AspectRatio(
                               aspectRatio: 50 / 50,
-                              child: Image.asset('assets/images/home.jpg'),
+                              child: Image.asset(Constants.homeImage),
                             ),
                           ),
                           Positioned(
@@ -82,7 +88,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                               width: width * 0.38,
                               height: height * 0.37,
                               child: Image.asset(
-                                'assets/images/splash.webp',
+                                Constants.splashImage,
                                 fit: BoxFit.contain,
                               ),
                             ),
@@ -92,10 +98,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                             top: 50,
                             child: GestureDetector(
                               onTap: () {
-                                Navigator.of(context).pop();
-                                ref
-                                    .read(loginControllerProvider.notifier)
-                                    .logout();
+                                _logout();
                               },
                               child: const Icon(
                                 Icons.logout,
@@ -115,12 +118,14 @@ class _HomePageState extends ConsumerState<HomePage> {
                             width: width,
                             height: height,
                             decoration: const BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.only(
-                                    topLeft: Radius.circular(
-                                      30.0,
-                                    ),
-                                    topRight: Radius.circular(30.0))),
+                              color: Colors.grey,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(
+                                  30.0,
+                                ),
+                                topRight: Radius.circular(30.0),
+                              ),
+                            ),
                             child: SingleChildScrollView(
                               child: Column(
                                 children: [
@@ -136,7 +141,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                         bottom: 20.0,
                                       ),
                                       child: Text(
-                                        'Fecha Recolección Datos: ${DateFormat('dd.MM.yyyy').format(
+                                        '${Constants.homeImage} ${DateFormat('dd.MM.yyyy').format(
                                           DateTime.parse(data.dateChecked),
                                         )}',
                                         textAlign: TextAlign.left,
@@ -146,28 +151,28 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   CovidTotalRowWidget(
                                     primaryTitle:
                                         data.totalTestResults.toString(),
-                                    primarySubtitle: 'Casos totales',
+                                    primarySubtitle: Constants.totalCases,
                                     secondaryTitle:
                                         data.hospitalized.toString(),
-                                    secondarySubtitle: 'Hospitalizados',
+                                    secondarySubtitle: Constants.hospitalized,
                                   ),
                                   const SizedBox(
                                     height: 10.0,
                                   ),
                                   CovidTotalRowWidget(
                                     primaryTitle: data.negative.toString(),
-                                    primarySubtitle: 'Pruebas negativas',
+                                    primarySubtitle: Constants.negatives,
                                     secondaryTitle: data.positive.toString(),
-                                    secondarySubtitle: 'Pruebas positivas',
+                                    secondarySubtitle: Constants.positives,
                                   ),
                                   const SizedBox(
                                     height: 10.0,
                                   ),
                                   CovidTotalRowWidget(
                                     primaryTitle: data.death.toString(),
-                                    primarySubtitle: 'Fallecidos',
+                                    primarySubtitle: Constants.totalDeaths,
                                     secondaryTitle: data.pending.toString(),
-                                    secondarySubtitle: 'Pendientes',
+                                    secondarySubtitle: Constants.pending,
                                   ),
                                   const SizedBox(
                                     height: 10.0,
@@ -175,10 +180,10 @@ class _HomePageState extends ConsumerState<HomePage> {
                                   CovidTotalRowWidget(
                                     primaryTitle:
                                         data.inIcuCurrently.toString(),
-                                    primarySubtitle: 'En UCI',
+                                    primarySubtitle: Constants.inUci,
                                     secondaryTitle:
                                         data.onVentilatorCurrently.toString(),
-                                    secondarySubtitle: 'Con ventiladores',
+                                    secondarySubtitle: Constants.onVentilator,
                                   ),
                                   const SizedBox(
                                     height: 20.0,
@@ -189,7 +194,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                                       horizontal: 25.0,
                                     ),
                                     child: Text(
-                                      'El proyecto COVID Tracking ha finalizado toda recopilación de datos a partir del 7 de marzo de 2021',
+                                      Constants.disclaimer,
                                       style: TextStyle(
                                         fontSize: 14.0,
                                       ),
@@ -222,7 +227,7 @@ class _HomePageState extends ConsumerState<HomePage> {
               }
             },
             error: (error, stackTrace) => Center(
-              child: Text('error:$error'),
+              child: Text('${Constants.error}${error.toString()}'),
             ),
             loading: () => const Center(
               child: CircularProgressIndicator(

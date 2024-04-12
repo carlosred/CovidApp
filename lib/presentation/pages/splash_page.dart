@@ -6,6 +6,7 @@ import 'package:covid_app/services/device_info_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/contants.dart';
 import '../providers/presentation_providers.dart';
 
 class SplashPage extends ConsumerStatefulWidget {
@@ -23,7 +24,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
 
       if (deviceInfo != null) {
         ref.read(deviceInfoProvider.notifier).state = deviceInfo;
-        Navigator.of(context).pushNamed(
+        Navigator.of(context).pushReplacementNamed(
           Routes.loginRoute,
         );
       }
@@ -48,7 +49,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               child: Center(
                 child: AspectRatio(
                   aspectRatio: 25 / 50,
-                  child: Image.asset('assets/images/splash.webp'),
+                  child: Image.asset(Constants.splashImage),
                 ),
               ),
             ),
@@ -57,7 +58,7 @@ class _SplashPageState extends ConsumerState<SplashPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('Loading...'),
+                  Text(Constants.loading),
                   SizedBox(
                     height: 25.0,
                   ),

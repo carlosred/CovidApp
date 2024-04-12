@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:covid_app/core/routes/routes.dart';
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:covid_app/presentation/controllers/login_controller.dart';
@@ -11,6 +13,12 @@ import 'package:flutter/services.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/contants.dart';
+import '../widgets/login_image_widget.dart';
+import '../widgets/login_welcome_widget.dart';
+import '../widgets/register_user_widget.dart';
+import '../widgets/social_media_row_widget.dart';
+
 class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
@@ -19,7 +27,7 @@ class LoginPage extends ConsumerStatefulWidget {
 }
 
 class _LoginPageState extends ConsumerState<LoginPage> {
-  String _selectedOption = 'CC';
+  String _selectedOption = Constants.cc;
   final _usermameController = TextEditingController();
   final _passwordController = TextEditingController();
 
@@ -45,9 +53,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
           Navigator.of(context).pushNamed(
             Routes.homeRoute,
           );
-        } else {
-          Toast.showToast(
-              context: context, message: 'Documento o Contraseña Incorrectos');
         }
       }
     });
@@ -73,43 +78,13 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         height: height,
         width: width,
         child: Column(mainAxisSize: MainAxisSize.min, children: [
-          Flexible(
+          const Flexible(
               fit: FlexFit.loose,
               flex: 7,
               child: Stack(
                 children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/login.webp'),
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                  const Positioned(
-                    bottom: 0,
-                    left: 10,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          'Bienvenido a:',
-                          softWrap: true,
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(left: 8.0),
-                          child: Text(
-                            'Evertec',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w900,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                  LoginImageWidget(),
+                  LoginWelcomeWidget(),
                 ],
               )),
           Flexible(
@@ -127,7 +102,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text('Tipo de documento:'),
+                    const Text(Constants.documentType),
                     const SizedBox(
                       height: 10.0,
                     ),
@@ -138,7 +113,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           _selectedOption = newValue.toString();
                         });
                       },
-                      items: ['CC', 'TI', 'Pasaporte']
+                      items: [Constants.cc, Constants.ti, Constants.passport]
                           .map<DropdownMenuItem<String>>((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
@@ -155,7 +130,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text('Número de documento:'),
+                      child: Text(Constants.passport),
                     ),
                     TextFormField(
                       controller: _usermameController,
@@ -169,7 +144,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const Padding(
                       padding: EdgeInsets.symmetric(vertical: 10.0),
-                      child: Text('Contraseña:'),
+                      child: Text(Constants.password),
                     ),
                     TextFormField(
                       controller: _passwordController,
@@ -192,7 +167,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             child: LoginButton(
                               ref: ref,
                               status: LoginStatus.success,
-                              onPressed: () {},
                             ),
                           );
                         } else {
@@ -203,8 +177,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             child: LoginButton(
                               ref: ref,
                               onPressed: () async {
-                                if (_selectedOption == 'CC') {
-                                  await ref
+                                if (_selectedOption == Constants.cc) {
+                                  var logged = await ref
                                       .read(loginControllerProvider.notifier)
                                       .login(
                                         username:
@@ -212,6 +186,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                                         password:
                                             _passwordController.text.trim(),
                                       );
+
+                                  if (logged != null && logged == false) {
+                                    Toast.showToast(
+                                        context: context,
+                                        message: Constants.wrongPassword);
+                                  }
                                 }
                               },
                               status: LoginStatus.login,
@@ -220,7 +200,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         }
                       },
                       error: (error, stack) => Text(
-                        'Error:${error.toString()}',
+                        '${Constants.error}${error.toString()}',
                       ),
                       loading: () => Padding(
                         padding: const EdgeInsets.symmetric(
@@ -229,43 +209,11 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         child: LoginButton(
                           ref: ref,
                           status: LoginStatus.loading,
-                          onPressed: () {},
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                        vertical: 10.0,
-                      ),
-                      child: Center(
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: const Text(
-                            'Registrar usuario',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                    const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        const SocialMediaWidget(
-                          image: 'assets/images/facebook.png',
-                          message: 'Facebook',
-                        ),
-                        const SocialMediaWidget(
-                          image: 'assets/images/google.png',
-                          message: 'Google',
-                        ),
-                        const SocialMediaWidget(
-                          image: 'assets/images/instagram.png',
-                          message: 'Google',
-                        ),
-                      ],
-                    ),
+                    const RegisterUserWidget(),
+                    const SocialMediaRowWidget(),
                     const SizedBox(
                       height: 20.0,
                     ),
@@ -275,65 +223,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             ),
           ),
         ]),
-      ),
-    );
-  }
-}
-
-class SocialMediaWidget extends StatelessWidget {
-  const SocialMediaWidget({
-    super.key,
-    required this.image,
-    required this.message,
-  });
-
-  final String image;
-  final String message;
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Container(
-        width: 70,
-        height: 70,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          shape: BoxShape.circle,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.withOpacity(0.5),
-              blurRadius: 2,
-              spreadRadius: 2,
-              offset: const Offset(0, 0),
-            ),
-          ],
-          border: Border.all(
-            color: Colors.grey.withOpacity(0.5),
-          ),
-        ),
-        child: Center(
-          child: Container(
-            width: 50,
-            height: 50,
-            decoration: const BoxDecoration(
-              shape: BoxShape.circle,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey,
-                  offset: Offset(0, 3),
-                  blurRadius: 5,
-                  spreadRadius: 2,
-                ),
-              ],
-            ),
-            child: ClipOval(
-              child: Image.asset(
-                image,
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-        ),
       ),
     );
   }

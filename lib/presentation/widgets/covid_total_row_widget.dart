@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/contants.dart';
+
 class CovidTotalRowWidget extends StatelessWidget {
   const CovidTotalRowWidget({
     super.key,
@@ -40,13 +42,13 @@ class CovidTotalRowWidget extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
-                      primaryTitle ?? 'No data',
+                      primaryTitle ?? Constants.noData,
                       style: const TextStyle(
                         fontSize: 18.0,
                       ),
                     ),
                     Text(
-                      primarySubtitle ?? 'No data',
+                      primarySubtitle ?? Constants.noData,
                       style: const TextStyle(
                         color: Colors.grey,
                         fontSize: 14.0,

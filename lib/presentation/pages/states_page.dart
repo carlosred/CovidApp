@@ -2,6 +2,7 @@ import 'package:covid_app/presentation/controllers/states_page_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/contants.dart';
 import '../widgets/state_tile_widget.dart';
 
 class StatesPage extends ConsumerStatefulWidget {
@@ -41,7 +42,7 @@ class _StatesPageState extends ConsumerState<StatesPage> {
           ),
         ),
         title: const Text(
-          'Detalles por region',
+          Constants.detailPerRegion,
           style: TextStyle(
             color: Colors.black,
           ),
@@ -77,7 +78,7 @@ class _StatesPageState extends ConsumerState<StatesPage> {
             },
             error: (error, stackTrace) => Center(
                   child: Text(
-                    'Error:$error',
+                    '${Constants.error}${error.toString()}',
                   ),
                 ),
             loading: () => const Center(

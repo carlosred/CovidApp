@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../utils/contants.dart';
 import '../../utils/enum.dart';
 import '../../utils/styles.dart';
 
@@ -12,12 +12,12 @@ class LoginButton extends StatefulWidget {
     super.key,
     required this.ref,
     required this.status,
-    required this.onPressed,
+    this.onPressed,
   });
 
   final WidgetRef ref;
   final LoginStatus status;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   State<LoginButton> createState() => _LoginButtonState();
@@ -38,7 +38,7 @@ class _LoginButtonState extends State<LoginButton> {
             width: 10.0,
           ),
           Text(
-            'Login Exitoso',
+            Constants.successfulLogin,
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -61,7 +61,7 @@ class _LoginButtonState extends State<LoginButton> {
       case LoginStatus.login:
         result = const [
           Text(
-            'Login',
+            Constants.login,
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,
@@ -73,7 +73,7 @@ class _LoginButtonState extends State<LoginButton> {
       default:
         result = const [
           Text(
-            'Login',
+            Constants.login,
             style: TextStyle(
               color: Colors.white,
               fontSize: 20,

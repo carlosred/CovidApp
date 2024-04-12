@@ -10,8 +10,8 @@ class CovidHttpClient {
     Map<String, dynamic>? result;
     try {
       var url = Uri.https(
-        Contants.baseApiUrl,
-        Contants.homeUrl,
+        Constants.baseApiUrl,
+        Constants.homeUrl,
       );
 
       var response = await http.get(
@@ -34,8 +34,8 @@ class CovidHttpClient {
     List<Map<String, dynamic>>? result = [];
     try {
       var url = Uri.https(
-        Contants.baseApiUrl,
-        Contants.getStatesCodes,
+        Constants.baseApiUrl,
+        Constants.getStatesCodes,
       );
 
       var response = await http.get(
@@ -59,8 +59,8 @@ class CovidHttpClient {
     List<Map<String, dynamic>>? result = [];
     try {
       var url = Uri.https(
-        Contants.baseApiUrl,
-        Contants.getStatesInfo,
+        Constants.baseApiUrl,
+        Constants.getStatesInfo,
       );
 
       var response = await http.get(
@@ -86,8 +86,8 @@ class CovidHttpClient {
     Map<String, dynamic>? result;
     try {
       var url = Uri.https(
-        Contants.baseApiUrl,
-        Contants.getStateDetail.replaceAll('{state}', state),
+        Constants.baseApiUrl,
+        Constants.getStateDetail.replaceAll('{state}', state),
       );
 
       var response = await http.get(

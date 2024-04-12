@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
+import '../../utils/contants.dart';
+
 class DeviceInfoWidget extends ConsumerWidget {
   const DeviceInfoWidget({
     super.key,
@@ -23,8 +25,9 @@ class DeviceInfoWidget extends ConsumerWidget {
     var amPmString = DateFormat('a').format(
       dateTimeNow,
     );
-    var platformString =
-        (Theme.of(context).platform == TargetPlatform.iOS) ? 'IOS' : 'ANDROID';
+    var platformString = (Theme.of(context).platform == TargetPlatform.iOS)
+        ? Constants.ios
+        : Constants.android;
     return Positioned(
       right: width * 0.04,
       top: -(height * 0.12),
@@ -82,7 +85,7 @@ class DeviceInfoWidget extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Nombre del dispositivo'),
+                        const Text(Constants.deviceName),
                         Text(deviceInfo?['device'] ?? '')
                       ],
                     ),
@@ -102,7 +105,7 @@ class DeviceInfoWidget extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Marca del dispositivo'),
+                        const Text(Constants.deviceBrand),
                         Text(
                           deviceInfo?['brand'] ?? '',
                           textAlign: TextAlign.start,
@@ -120,7 +123,7 @@ class DeviceInfoWidget extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Tipo del dispositivo'),
+                        const Text(Constants.deviceType),
                         Text(
                           deviceInfo?['product'] ?? '',
                         )
@@ -142,7 +145,7 @@ class DeviceInfoWidget extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Modelo del dispositivo'),
+                        const Text(Constants.deviceModel),
                         Text(deviceInfo?['model'] ?? '')
                       ],
                     ),
@@ -157,7 +160,7 @@ class DeviceInfoWidget extends ConsumerWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Sistema operativo y su versión'),
+                        const Text(Constants.osVersion),
                         Text(
                             '$platformString - ${deviceInfo?['version']['release']}')
                       ],

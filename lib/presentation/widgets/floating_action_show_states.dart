@@ -1,3 +1,4 @@
+import 'package:covid_app/utils/contants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -20,7 +21,7 @@ class _FloatingShowStatesButtonState
   ) {
     return FloatingActionButton.extended(
       label: const Text(
-        'Ver Mas detalles',
+        Constants.seeMoreDetails,
         style: TextStyle(
           color: Colors.white,
           fontSize: 16.0,

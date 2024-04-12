@@ -1,7 +1,8 @@
 import 'package:covid_app/presentation/controllers/state_detail_page_controller.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import '../../utils/contants.dart';
 
 class StateDetailPage extends ConsumerStatefulWidget {
   const StateDetailPage({required this.state, super.key});
@@ -67,7 +68,7 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
                     children: [
                       const Center(
                         child: Text(
-                          'Notes',
+                          Constants.notes,
                           style: TextStyle(
                             fontSize: 30.0,
                             color: Colors.black,
@@ -87,7 +88,7 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
                           const Expanded(
                             flex: 2,
                             child: Text(
-                              'Web site:',
+                              Constants.website,
                             ),
                           ),
                           Expanded(
@@ -123,7 +124,7 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
               shadowColor: Colors.grey,
               surfaceTintColor: Colors.white,
               title: const Text(
-                'Loading..',
+                Constants.loading,
                 style: TextStyle(
                   fontSize: 25.0,
                   color: Colors.black,
@@ -158,7 +159,7 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
           shadowColor: Colors.grey,
           surfaceTintColor: Colors.white,
           title: const Text(
-            'Loading..',
+            Constants.loading,
             style: TextStyle(
               fontSize: 25.0,
               color: Colors.black,
@@ -189,9 +190,9 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
           ),
           shadowColor: Colors.grey,
           surfaceTintColor: Colors.white,
-          title: const Text(
-            'Error',
-            style: TextStyle(
+          title: Text(
+            '${Constants.error}${error.toString()}',
+            style: const TextStyle(
               fontSize: 30.0,
               color: Colors.black,
               fontWeight: FontWeight.w400,
@@ -203,7 +204,7 @@ class _StateDetailPageState extends ConsumerState<StateDetailPage> {
           height: height,
           width: width,
           child: Center(
-            child: Text('Error: ${error.toString()}'),
+            child: Text('${Constants.error} ${error.toString()}'),
           ),
         ),
       ),
