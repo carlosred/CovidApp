@@ -7,7 +7,7 @@ part of 'state_detail_page_controller.dart';
 // **************************************************************************
 
 String _$stateDetailPageControllerHash() =>
-    r'800e93a8447152b3303cec3d4582a4f5604257af';
+    r'80f018732db4bbd33446f74f8b15280c3bb00e97';
 
 /// See also [StateDetailPageController].
 @ProviderFor(StateDetailPageController)
