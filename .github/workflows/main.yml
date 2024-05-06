@@ -6,13 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
-      with:
-        java-version: '17.x'
     - uses: subosito/flutter-action@v2
       with:
         flutter-version: '3.19.3'
     - run: flutter pub get
-    - run: flutter build apk --debug --split-per-abi
+    - run: flutter build apk 
     - name: Push APK to Releases
       uses: ncipollo/release-action@v1
       with:
