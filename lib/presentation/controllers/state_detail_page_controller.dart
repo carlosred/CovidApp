@@ -1,6 +1,8 @@
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../core/services/service_locator.dart';
+import '../../data/repositories/covid_repository.dart';
 import '../../domain/models/covid_state_detail.dart';
 
 part 'state_detail_page_controller.g.dart';
@@ -17,10 +19,9 @@ class StateDetailPageController extends _$StateDetailPageController {
   }) async {
     state = const AsyncLoading();
     try {
-      var stateDetail =
-          await ref.read(covidRepositoryProvider).getCovidStateDetail(
-                state: covidState,
-              );
+      var stateDetail = await getIt<CovidRepository>().getCovidStateDetail(
+        state: covidState,
+      );
 
       state = AsyncData(stateDetail);
     } catch (error, stack) {

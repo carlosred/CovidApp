@@ -20,4 +20,21 @@ class AuthData {
       'password': password,
     };
   }
+
+  @override
+  bool operator ==(Object other) {
+    if (identical(this, other)) {
+      return true;
+    }
+    if (other.runtimeType != runtimeType) {
+      return false;
+    }
+
+    return other is AuthData &&
+        other.password == password &&
+        other.username == username;
+  }
+
+  @override
+  int get hashCode => Object.hash(password, username);
 }

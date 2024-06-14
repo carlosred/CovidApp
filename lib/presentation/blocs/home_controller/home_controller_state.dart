@@ -1,0 +1,1 @@
+class CovidRepositoryState extends CovidRepositoryState {}

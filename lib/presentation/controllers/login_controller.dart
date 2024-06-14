@@ -1,4 +1,6 @@
+import 'package:covid_app/core/services/service_locator.dart';
 import 'package:covid_app/data/providers/data_providers.dart';
+import 'package:covid_app/data/repositories/login_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'login_controller.g.dart';
@@ -22,10 +24,10 @@ class LoginController extends _$LoginController {
           seconds: 3,
         ),
       );
-      var auth = await ref.read(authRepositoryProvider).login(
-            username: username,
-            password: password,
-          );
+      var auth = await getIt<AuthRepository>().login(
+        username: username,
+        password: password,
+      );
 
       state = AsyncData(auth);
       result = auth;

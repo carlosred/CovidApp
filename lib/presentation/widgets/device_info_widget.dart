@@ -1,3 +1,4 @@
+import 'package:covid_app/core/services/service_locator.dart';
 import 'package:covid_app/presentation/providers/presentation_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,7 +19,7 @@ class DeviceInfoWidget extends ConsumerWidget {
   final Map<String, dynamic>? deviceInfo;
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    var dateTimeNow = ref.watch(dateTimeProvider);
+    var dateTimeNow = DateTime.now();
     var nowString = DateFormat('HH:mm:ss').format(
       dateTimeNow,
     );

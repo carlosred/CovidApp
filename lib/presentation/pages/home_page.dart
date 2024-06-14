@@ -1,11 +1,14 @@
 import 'dart:async';
 
+import 'package:covid_app/core/services/service_locator.dart';
 import 'package:covid_app/presentation/controllers/home_page_controller.dart';
 import 'package:covid_app/presentation/controllers/login_controller.dart';
+import 'package:covid_app/presentation/cubits/device_info_cubit.dart';
 import 'package:covid_app/presentation/providers/presentation_providers.dart';
 import 'package:covid_app/presentation/widgets/covid_total_row_widget.dart';
 import 'package:covid_app/presentation/widgets/floating_action_show_states.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -29,7 +32,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         _timerDateTimeNow = Timer.periodic(Durations.extralong4, (timer) {
-          ref.read(dateTimeProvider.notifier).state = DateTime.now();
+          //  ref.read(dateTimeProvider.notifier).state = DateTime.now();
         });
         ref.read(homePageControllerProvider.notifier).getCovidTotalData();
       },
@@ -53,7 +56,8 @@ class _HomePageState extends ConsumerState<HomePage> {
   Widget build(BuildContext context) {
     var width = MediaQuery.sizeOf(context).width;
     var height = MediaQuery.sizeOf(context).height;
-    var deviceInfo = ref.read(deviceInfoProvider);
+    // var deviceInfo = ref.read(deviceInfoProvider);
+
     var homePageController = ref.watch(homePageControllerProvider);
 
     return PopScope(
@@ -210,7 +214,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                           DeviceInfoWidget(
                             width: width,
                             height: height,
-                            deviceInfo: deviceInfo,
+                            deviceInfo: getIt<DeviceInfoCubit>().state,
                           ),
                         ],
                       ),

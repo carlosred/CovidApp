@@ -10,12 +10,10 @@ import 'loader.dart';
 class LoginButton extends StatefulWidget {
   const LoginButton({
     super.key,
-    required this.ref,
     required this.status,
     this.onPressed,
   });
 
-  final WidgetRef ref;
   final LoginStatus status;
   final VoidCallback? onPressed;
 

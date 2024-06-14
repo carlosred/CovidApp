@@ -1,4 +1,6 @@
+import 'package:covid_app/core/services/service_locator.dart';
 import 'package:covid_app/data/providers/data_providers.dart';
+import 'package:covid_app/data/repositories/covid_repository.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../domain/models/covid_total_data.dart';
@@ -15,8 +17,7 @@ class HomePageController extends _$HomePageController {
   Future<void> getCovidTotalData() async {
     state = const AsyncLoading();
     try {
-      var covidTotals =
-          await ref.read(covidRepositoryProvider).getCovidTotalData();
+      var covidTotals = await getIt<CovidRepository>().getCovidTotalData();
 
       state = AsyncData(covidTotals);
     } catch (error, stack) {

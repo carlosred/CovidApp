@@ -1,6 +1,9 @@
 import 'package:covid_app/data/providers/data_providers.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../core/services/service_locator.dart';
+import '../../data/repositories/covid_repository.dart';
+
 part 'states_page_controller.g.dart';
 
 @Riverpod(keepAlive: true)
@@ -14,10 +17,8 @@ class StatesPageController extends _$StatesPageController {
     state = const AsyncLoading();
     try {
       var result = <Map<String, dynamic>>[];
-      var covidStates =
-          await ref.read(covidRepositoryProvider).getCovidStates();
-      var covidStatesInfo =
-          await ref.read(covidRepositoryProvider).getCovidStatesInfo();
+      var covidStates = await getIt<CovidRepository>().getCovidStates();
+      var covidStatesInfo = await getIt<CovidRepository>().getCovidStatesInfo();
       if (covidStates != null && covidStatesInfo != null) {
         for (var covidStateInfo in covidStatesInfo) {
           for (var covidState in covidStates) {
